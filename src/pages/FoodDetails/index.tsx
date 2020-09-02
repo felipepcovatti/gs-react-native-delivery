@@ -87,20 +87,34 @@ const FoodDetails: React.FC = () => {
   }, [routeParams]);
 
   function handleIncrementExtra(id: number): void {
-    // Increment extra quantity
+    setExtras(prevState =>
+      prevState.map(extra => ({
+        ...extra,
+        quantity: +(extra.id === id) + extra.quantity,
+      })),
+    );
   }
 
   function handleDecrementExtra(id: number): void {
-    // Decrement extra quantity
+    setExtras(prevState =>
+      prevState.map(extra => ({
+        ...extra,
+        quantity:
+          extra.id === id && extra.quantity
+            ? extra.quantity - 1
+            : extra.quantity,
+      })),
+    );
   }
 
   function handleIncrementFood(): void {
-    // Increment food quantity
+    setFoodQuantity(prevState => prevState + 1);
   }
 
   function handleDecrementFood(): void {
-    // Decrement food quantity
+    setFoodQuantity(prevState => (prevState === 1 ? prevState : prevState - 1));
   }
+
 
   const toggleFavorite = useCallback(() => {
     // Toggle if food is favorite or not
