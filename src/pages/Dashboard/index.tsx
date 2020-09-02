@@ -81,7 +81,7 @@ const Dashboard: React.FC = () => {
   }, []);
 
   function handleSelectCategory(id: number): void {
-    // Select / deselect category
+    setSelectedCategory(prevState => (prevState === id ? undefined : id));
   }
 
   return (
