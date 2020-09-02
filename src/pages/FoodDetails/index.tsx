@@ -115,9 +115,14 @@ const FoodDetails: React.FC = () => {
     setFoodQuantity(prevState => (prevState === 1 ? prevState : prevState - 1));
   }
 
+  const toggleFavorite = useCallback(async () => {
+    if (isFavorite) {
+      await api.delete(`favorites/${food.id}`);
+    } else {
+      await api.post('favorites', food);
+    }
 
-  const toggleFavorite = useCallback(() => {
-    // Toggle if food is favorite or not
+    setIsFavorite(prevState => !prevState);
   }, [isFavorite, food]);
 
   const cartTotal = useMemo(() => {
